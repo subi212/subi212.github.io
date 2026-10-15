@@ -296,9 +296,144 @@ a.project:hover .project-title { text-decoration: underline; }
   .wip-bubble { transition: opacity 0.2s ease; }
 }
 
+/* ---------- Case study pages ---------- */
+.case { padding-bottom: 216px; }
+
+.case-nav {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 40px;
+}
+
+.case-nav a {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  color: var(--accent);
+  font-size: 16px;
+  text-decoration: none;
+}
+
+.case-nav a:hover { text-decoration: underline; }
+.case-nav img.flip { transform: scaleX(-1); }
+
+/* Info notice (blue bar on top) */
+.notice {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  padding: 20px 20px 17px 16px;
+  border: 1px solid #aad2ff;
+  border-top: 0;
+  border-radius: 4px;
+  background: #eef6ff;
+  box-shadow: 0 1px 1.5px rgba(0, 0, 0, 0.12);
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 40px;
+}
+
+.notice::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: #235ae4;
+}
+
+.notice img { flex: none; }
+
+.notice p {
+  color: #2e2e32;
+  font-size: 14px;
+  line-height: 21px;
+}
+
+.case-head .project-title {
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.case-head .project-years { color: var(--text-muted); }
+.case-head strong { color: var(--text); font-weight: 400; }
+
+.case-hero {
+  margin: 40px 0 0;
+}
+
+.case-hero img {
+  width: 100%;
+  aspect-ratio: 926 / 364;
+  object-fit: cover;
+  border-radius: 20px;
+}
+
+.case-hero figcaption {
+  margin-top: 8px;
+  color: var(--text-muted);
+  font-size: 12px;
+  text-align: center;
+}
+
+.case-section { margin-top: 60px; }
+
+.case-section h2 {
+  margin-bottom: 20px;
+  color: var(--text-strong);
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.challenges {
+  margin: 0;
+  padding-left: 24px;
+  color: var(--text-muted);
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+.challenges li + li { margin-top: 12px; }
+
+.challenges strong { color: var(--text); font-weight: 400; }
+
+.features {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.feature {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.feature h3 {
+  margin: 0;
+  color: var(--text);
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.feature p,
+.case-muted {
+  color: var(--text-muted);
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+.case-contact { font-size: 16px; }
+.case-contact a { color: var(--accent); text-decoration: none; }
+.case-contact a:hover { text-decoration: underline; }
+
 /* Phones and small tablets */
 @media (max-width: 760px) {
   .container { padding: 48px 16px 40px; }
+  .case { padding-bottom: 96px; }
+  .case-section { margin-top: 48px; }
+  .case-hero img { border-radius: 12px; }
   .intro-text { font-size: 20px; }
   .projects { gap: 56px; margin-top: 48px; }
   .project { gap: 20px; }
