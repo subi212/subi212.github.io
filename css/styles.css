@@ -60,12 +60,20 @@ img { display: block; }
 }
 
 .avatar {
+  position: relative;
+  z-index: 3;
   width: 64px;
   height: 64px;
   border-radius: 50%;
   overflow: hidden;
   margin-bottom: 32px;
+  transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
 }
+
+.avatar img { pointer-events: none; }
 
 .avatar img {
   width: 75.97px;

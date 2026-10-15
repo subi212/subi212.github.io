@@ -124,3 +124,90 @@
   window.addEventListener('resize', lockWidth);
   setInterval(next, HOLD);
 })();
+
+// Avatar: runs away from the cursor (or finger) and drifts back home after a moment
+(function () {
+  const avatar = document.querySelector('.avatar');
+  if (!avatar) return;
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  const area = avatar.parentElement;
+  const NEAR = 70;       // px from the avatar's center that counts as "too close"
+  const COOLDOWN = 250;  // ms between jumps, so it doesn't jitter
+  const HOME_AFTER = 2500;
+
+  let x = 0;
+  let y = 0;
+  let lastJump = -Infinity;
+  let homeTimer = null;
+
+  function place(rotate) {
+    avatar.style.transform = `translate(${x}px, ${y}px) rotate(${rotate}deg)`;
+  }
+
+  function flee(px, py) {
+    const now = performance.now();
+    if (now - lastJump < COOLDOWN) return;
+    lastJump = now;
+
+    const r = avatar.getBoundingClientRect();
+    const a = area.getBoundingClientRect();
+
+    // Direction away from the pointer (random if it's dead center)
+    let dx = r.left + r.width / 2 - px;
+    let dy = r.top + r.height / 2 - py;
+    const len = Math.hypot(dx, dy);
+    if (len < 1) {
+      const angle = Math.random() * Math.PI * 2;
+      dx = Math.cos(angle);
+      dy = Math.sin(angle);
+    } else {
+      dx /= len;
+      dy /= len;
+    }
+
+    // Allowed range, relative to the avatar's home spot
+    const homeLeft = r.left - x;
+    const minX = a.left - homeLeft;
+    const maxX = a.right - homeLeft - r.width;
+    const minY = -40;
+    const maxY = 60;
+
+    const dist = 90 + Math.random() * 60;
+    let nx = x + dx * dist;
+    let ny = y + dy * dist;
+    // Cornered? Bounce the other way instead
+    if (nx < minX || nx > maxX) nx = x - dx * dist;
+    if (ny < minY || ny > maxY) ny = y - dy * dist;
+    x = Math.min(maxX, Math.max(minX, nx));
+    y = Math.min(maxY, Math.max(minY, ny));
+
+    place((Math.random() - 0.5) * 30);
+
+    clearTimeout(homeTimer);
+    homeTimer = setTimeout(() => {
+      x = 0;
+      y = 0;
+      place(0);
+    }, HOME_AFTER);
+  }
+
+  // Mouse: jump as soon as the cursor gets close, before it even touches
+  let pending = null;
+  document.addEventListener('mousemove', (e) => {
+    if (pending) return;
+    pending = requestAnimationFrame(() => {
+      pending = null;
+      const r = avatar.getBoundingClientRect();
+      const d = Math.hypot(r.left + r.width / 2 - e.clientX, r.top + r.height / 2 - e.clientY);
+      if (d < NEAR) flee(e.clientX, e.clientY);
+    });
+  });
+
+  // Touch or a lucky click: get away on contact
+  avatar.addEventListener('pointerdown', (e) => {
+    e.preventDefault();
+    lastJump = -Infinity;
+    flee(e.clientX, e.clientY);
+  });
+})();
