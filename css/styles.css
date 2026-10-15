@@ -6,6 +6,7 @@
   --accent: #1100a8;
   --divider: #d3d3d3;
   --nav-bg: #fbf9f9;
+  --imessage-blue: #0b84fe;
   --bg: #ffffff;
   --content-width: 926px;
   --font: "Work Sans", system-ui, sans-serif;
@@ -84,6 +85,32 @@ img { display: block; }
 .intro-text em {
   font-weight: 400;
   font-style: italic;
+}
+
+/* Rotating job title in the headline */
+.role-rotator {
+  display: inline-block;
+  white-space: nowrap;
+  vertical-align: bottom;
+  transition: width 0.4s ease;
+}
+
+.role-text {
+  display: inline-block;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.role-text em { color: var(--accent); }
+
+.role-text.is-leaving {
+  opacity: 0;
+  transform: translateY(-0.5em);
+}
+
+.role-text.is-entering {
+  opacity: 0;
+  transform: translateY(0.5em);
+  transition: none;
 }
 
 .location {
@@ -177,12 +204,97 @@ img { display: block; }
   height: auto;
 }
 
-a.project .card { transition: transform 0.2s ease, box-shadow 0.2s ease; }
-a.project:hover .card {
-  transform: translateY(-4px);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+.card-media {
+  position: absolute;
+  inset: 0;
 }
+
+/* Hover: zoom the thumbnail slightly inside the card */
+a.project .card-media { transition: transform 0.4s ease; }
+a.project:hover .card-media,
+a.project:focus-visible .card-media { transform: scale(1.04); }
 a.project:hover .project-title { text-decoration: underline; }
+
+/* Work-in-progress card: iOS-style message bubble with a typewriter effect */
+.project--wip { cursor: pointer; }
+.project--wip:focus-visible { outline: none; }
+.project--wip:focus-visible .card { outline: 2px solid var(--imessage-blue); outline-offset: 4px; }
+
+.project-meta { position: relative; }
+
+/* Floats just below the year, so it doesn't push the layout around */
+.wip-bubble {
+  position: absolute;
+  z-index: 2;
+  left: 0;
+  top: calc(100% + 12px);
+  display: grid;
+  width: max-content;
+  max-width: 260px;
+  padding: 10px 16px;
+  border-radius: 20px;
+  background: var(--imessage-blue);
+  color: #fff;
+  font-size: 16px;
+  line-height: 1.35;
+  opacity: 0;
+  transform: scale(0.6);
+  transform-origin: 0 0;
+  transition: opacity 0.2s ease, transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+  pointer-events: none;
+}
+
+.project--wip.is-open .wip-bubble {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* iMessage tail: a blue curve, then a card-colored curve that carves it */
+.wip-bubble::before,
+.wip-bubble::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  height: 20px;
+}
+
+.wip-bubble::before {
+  left: -7px;
+  width: 20px;
+  background: var(--imessage-blue);
+  border-bottom-right-radius: 16px 14px;
+}
+
+.wip-bubble::after {
+  left: -26px;
+  width: 26px;
+  background: var(--bg);
+  border-bottom-right-radius: 10px;
+}
+
+/* Ghost text reserves the final size so the bubble doesn't grow while typing */
+.wip-bubble-ghost,
+.wip-bubble-text { grid-area: 1 / 1; }
+.wip-bubble-ghost { visibility: hidden; }
+
+.wip-bubble-text.is-typing::after {
+  content: "";
+  display: inline-block;
+  width: 2px;
+  height: 1.1em;
+  margin-left: 2px;
+  vertical-align: text-bottom;
+  background: currentColor;
+  animation: caret-blink 0.8s steps(1) infinite;
+}
+
+@keyframes caret-blink {
+  50% { opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .wip-bubble { transition: opacity 0.2s ease; }
+}
 
 /* Phones and small tablets */
 @media (max-width: 760px) {
@@ -193,4 +305,19 @@ a.project:hover .project-title { text-decoration: underline; }
   .project-head { grid-template-columns: 1fr; gap: 12px; }
   .project-years { margin-top: 8px; }
   .card { border-radius: 12px; }
+  /* Single-column layout: open the bubble in place instead of covering the description */
+  .wip-bubble {
+    position: relative;
+    top: auto;
+    max-height: 0;
+    padding: 0 14px;
+    font-size: 14px;
+    transition: opacity 0.2s ease, transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1),
+      max-height 0.3s ease, margin 0.3s ease, padding 0.3s ease;
+  }
+  .project--wip.is-open .wip-bubble {
+    max-height: 160px;
+    margin-top: 12px;
+    padding: 8px 14px;
+  }
 }
