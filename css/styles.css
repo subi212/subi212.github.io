@@ -428,12 +428,171 @@ a.project:hover .project-title { text-decoration: underline; }
 .case-contact a { color: var(--accent); text-decoration: none; }
 .case-contact a:hover { text-decoration: underline; }
 
+/* Body copy on case study pages */
+.case-text {
+  color: var(--text-muted);
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+.case-text + .case-text { margin-top: 24px; }
+
+.research-steps { margin-top: 40px; gap: 40px; }
+
+/* Browser mockup around a product screenshot */
+.browser-frame {
+  max-width: 850px;
+  margin: 58px auto 0;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #fff;
+  box-shadow: 0 8px 20px rgba(31, 46, 77, 0.18);
+}
+
+.browser-toolbar {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 34px;
+  background: #f2f5fa;
+}
+
+.browser-dots {
+  position: absolute;
+  left: 13px;
+  display: flex;
+  gap: 5px;
+}
+
+.browser-dots i {
+  width: 7.3px;
+  height: 7.3px;
+  border-radius: 50%;
+  background: #ff5e57;
+}
+
+.browser-dots i:nth-child(2) { background: #ffbd2e; }
+.browser-dots i:nth-child(3) { background: #33c75c; }
+
+.browser-address {
+  width: 60%;
+  height: 20.4px;
+  padding-left: 12px;
+  border-radius: 4.86px;
+  background: #fff;
+  color: #596375;
+  font: 7.9px/20.4px Inter, system-ui, sans-serif;
+}
+
+.browser-shot {
+  width: 100%;
+  aspect-ratio: 851 / 462;
+  object-fit: cover;
+  object-position: top;
+}
+
+/* Two-column grid of grey cards */
+.case-section .h2-loose { margin-bottom: 32px; }
+
+.card-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px 24px;
+}
+
+.info-card {
+  min-height: 162px;
+  padding: 32px 38px;
+  border-radius: 20px;
+  background: #f7f7f7;
+}
+
+.info-card h3,
+.solution-text h3 {
+  margin: 0 0 16px;
+  color: var(--text);
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.info-card p,
+.solution-text p {
+  max-width: 375px;
+  color: var(--text-muted);
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+/* Captioned images */
+.case-figure {
+  margin: 40px 0 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+}
+
+.case-figure figcaption {
+  color: var(--text-muted);
+  font-size: 12px;
+  text-align: center;
+}
+
+.case-figure img { width: 100%; height: auto; }
+
+/* Image cropped the same way as in Figma */
+.crop {
+  position: relative;
+  aspect-ratio: var(--ratio);
+  overflow: hidden;
+}
+
+.crop img {
+  position: absolute;
+  max-width: none;
+}
+
+.flow-diagram {
+  max-width: 850px;
+  margin: 32px auto 0;
+}
+
+/* Solution: text on the left, visual on the right */
+.solution-rows {
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+  margin-top: 60px;
+}
+
+.solution-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  align-items: center;
+}
+
+.solution-row .solution-text p { max-width: none; }
+.solution-text p + p { margin-top: 24px; }
+
+.next-up { margin-top: 40px; }
+.next-up p { max-width: none; }
+
+.case-section > .case-contact { margin-top: 40px; }
+
 /* Phones and small tablets */
 @media (max-width: 760px) {
   .container { padding: 48px 16px 40px; }
   .case { padding-bottom: 96px; }
   .case-section { margin-top: 48px; }
   .case-hero img { border-radius: 12px; }
+  .card-grid,
+  .solution-row { grid-template-columns: 1fr; }
+  .card-grid { gap: 16px; }
+  .info-card { min-height: 0; padding: 24px; }
+  .solution-rows { gap: 40px; margin-top: 40px; }
+  .browser-frame { margin-top: 40px; }
   .intro-text { font-size: 20px; }
   .projects { gap: 56px; margin-top: 48px; }
   .project { gap: 20px; }

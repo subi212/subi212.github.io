@@ -1,0 +1,199 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>API Sandbox — Subi Amuti</title>
+  <meta name="description" content="Case study: designing an in-product onboarding checklist for API Sandbox, an internal tool for product managers.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <nav class="site-nav">
+    <a href="index.html">Home</a>
+    <a href="https://www.linkedin.com/in/amuti-subi-407277165" target="_blank" rel="noopener">Linkedin</a>
+  </nav>
+
+  <main class="container case">
+    <div class="case-nav">
+      <a href="index.html"><img src="assets/icons/arrow-back.svg" alt="" width="16" height="14">Back</a>
+    </div>
+
+    <header class="project-head case-head">
+      <div>
+        <h1 class="project-title">API Sandbox</h1>
+        <p class="project-years">2021-2024</p>
+      </div>
+      <p class="project-desc">
+        API Sandbox is an internal tool where product managers upload API specs and create simulated
+        responses to test APIs before they go live. Over three years, I designed many of its features
+        end to end, including database mapping, payload generation, and test data. This case study
+        walks through one of them, the onboarding checklist.
+      </p>
+    </header>
+
+    <div class="browser-frame">
+      <div class="browser-toolbar" aria-hidden="true">
+        <span class="browser-dots"><i></i><i></i><i></i></span>
+        <span class="browser-address">api-sandbox.usbank.com</span>
+      </div>
+      <img class="browser-shot" src="assets/sandbox/product.jpg" alt="API Sandbox product screen showing an API spec with its endpoints">
+    </div>
+
+    <section class="case-section">
+      <h2>The problem</h2>
+      <p class="case-text">
+        API Sandbox is powerful, but product managers don’t use it every day. Most come in once in a
+        while, so they relearn the tool each time. For a first-time PM, setup took a few weeks and
+        needed constant help from the sandbox team. When they got stuck, they watched training videos
+        again and then reached out for support. That meant low adoption, and a sandbox team that spent
+        more time answering questions than improving the tool.
+      </p>
+    </section>
+
+    <section class="case-section">
+      <h2>The research</h2>
+      <p class="case-text">
+        I started broad, then went deep. A short survey told me how PMs were using the tool and who was
+        struggling. From those responses, I picked PMs to interview one on one and watch them walk
+        through the tool.
+      </p>
+      <div class="features research-steps">
+        <div class="feature">
+          <img src="assets/icons/list.svg" alt="" width="24" height="24">
+          <h3>Step 1: Survey</h3>
+          <p>I sent a short survey to PMs who use the tool. It asked about their experience level, whether they had deployed an API on their own, and how easy the tool was to use, each with a “please explain” follow-up. The answers showed who was comfortable and who was stuck, and gave me a shortlist of PMs to interview.</p>
+        </div>
+        <div class="feature">
+          <img src="assets/icons/group.svg" alt="" width="24" height="24">
+          <h3>Step 2: One-on-one interviews</h3>
+          <p>In the interviews, I took PMs through the main flow, from landing on the page to deploying. I asked what they expected at each step, what they did next, and where they got lost. This surfaced things the survey couldn’t: PMs didn’t know what to do after uploading a spec, weren’t sure what database mapping was for, and didn’t understand terms like “deploy” and “request body.”</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="case-section">
+      <h2 class="h2-loose">What I learned</h2>
+      <div class="card-grid">
+        <div class="info-card">
+          <h3>No guidance for first-timers</h3>
+          <p>PMs had to complete the training several times before the tool made sense. Nothing inside the product told them where to start.</p>
+        </div>
+        <div class="info-card">
+          <h3>Easy to lose your place</h3>
+          <p>Because PMs use the tool occasionally, they forgot where they’d stopped. Several asked for a simple, followable list of steps.</p>
+        </div>
+        <div class="info-card">
+          <h3>Errors that didn’t explain themselves</h3>
+          <p>When a spec file failed to upload or a deployment failed, the message didn’t say what was wrong or how to fix it.</p>
+        </div>
+        <div class="info-card">
+          <h3>Unclear deployment terms</h3>
+          <p>Words like “deploy,” “update,” and “request body” weren’t obvious, and PMs weren’t sure what each deployment option would do.</p>
+        </div>
+      </div>
+    </section>
+
+    <figure class="case-figure">
+      <figcaption>What PMs told us: pain points from the survey and interviews, grouped by step.</figcaption>
+      <div class="crop" style="--ratio: 3026 / 1890; width: 100%; max-width: 850px">
+        <img src="assets/sandbox/pain-points.png" alt="Affinity map of sticky notes with PM pain points, grouped by step" style="left:0; top:-0.32%; width:100%; height:100.32%">
+      </div>
+    </figure>
+
+    <figure class="case-figure">
+      <figcaption>What we could do about it: opportunities for the design.</figcaption>
+      <img src="assets/sandbox/opportunities.png" alt="Sticky notes listing design opportunities" style="max-width: 704px">
+    </figure>
+
+    <section class="case-section">
+      <h2 class="h2-loose">Design goals</h2>
+      <div class="card-grid">
+        <div class="info-card">
+          <h3>Guide PMs step by step</h3>
+          <p>Put the “how to” inside the product so PMs don’t need to leave and rewatch training.</p>
+        </div>
+        <div class="info-card">
+          <h3>Let PMs pick up where they left off</h3>
+          <p>Save progress and always show the next step, so coming back after weeks feels easy.</p>
+        </div>
+        <div class="info-card">
+          <h3>Simplify each task</h3>
+          <p>Give clear, plain-language information at each step, and errors that say what went wrong and how to fix it.</p>
+        </div>
+        <div class="info-card">
+          <h3>Explain deployment</h3>
+          <p>Make deployment options and what happens after deploying easy to understand.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="case-section">
+      <h2>Mapping the journey</h2>
+      <p class="case-text">
+        I worked with the product and development teams to map every step of deploying an API, from
+        uploading a spec to going live. Some steps are required, while others depend on the use case,
+        so the checklist needed to adapt instead of forcing everyone down one path.
+      </p>
+      <div class="crop flow-diagram" style="--ratio: 850 / 330">
+        <img src="assets/sandbox/user-flow.png" alt="User flow diagram of deploying an API, from uploading a spec to going live" style="left:0; top:0; width:100%; height:110.61%">
+      </div>
+    </section>
+
+    <section class="case-section">
+      <h2>The solution</h2>
+      <p class="case-text">
+        I designed an onboarding checklist that lives inside the tool, so PMs no longer have to leave it
+        to find training. It breaks the path from uploading a spec to deploying an API into five steps,
+        and it remembers where each PM stopped. It works in three layers. A small floating widget shows
+        where you left off. A checklist panel shows the whole path and your progress. A task details
+        view gives plain-language, step-by-step help for the task in front of you. PMs can start
+        anywhere, leave and return, and always see what to do next.
+      </p>
+
+      <div class="solution-rows">
+        <div class="solution-row">
+          <div class="solution-text" style="max-width: 375px">
+            <h3>Onboarding widget</h3>
+            <p>A small card floats in the corner of the tool and shows the step you’re on. Coming back after weeks away takes one glance. Tap it to open the full checklist.</p>
+          </div>
+          <div class="crop" style="--ratio: 451 / 161">
+            <img src="assets/sandbox/widget.gif" alt="Animated onboarding widget showing the current step" style="left:-40.86%; top:-49.69%; width:181.72%; height:199.38%">
+          </div>
+        </div>
+        <div class="solution-row">
+          <div class="solution-text">
+            <h3>Checklist panel</h3>
+            <p>The checklist is a floating panel that shows all the tasks and subtasks needed to deploy an API. It doesn’t block the page, so PMs can keep working while they track their progress, and they can hide it whenever they want.</p>
+            <p>Selecting a task opens the task details view in the same panel. It gives a short introduction to the task, numbered steps, a tutorial link and a link to the product guide, so PMs get help without leaving the tool. Home takes them back to the checklist, and Continue or Mark as done moves them to the next step.</p>
+          </div>
+          <div class="crop" style="--ratio: 451 / 503">
+            <img src="assets/sandbox/checklist.gif" alt="Animated checklist panel moving from the task list into task details" style="left:-19.12%; top:-4.26%; width:138.36%; height:108.9%">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="case-section">
+      <h2>Results</h2>
+      <p class="case-text">
+        The onboarding checklist shipped as part of API Sandbox. First-time PMs get a clear path from
+        uploading a spec to deploying an API inside the tool, and returning PMs can pick up where they
+        left off. Help now sits next to each task, so PMs no longer have to leave the tool for training
+        videos or the sandbox team.
+      </p>
+      <p class="case-text">
+        After release, I pivoted to other projects, so I don’t have any metrics or usage data from after
+        launch. I’d rather say that than guess at numbers.
+      </p>
+      <div class="solution-text next-up">
+        <h3>Where it goes next: AI agent</h3>
+        <p>The team is looking at bringing an AI agent into the sandbox, and the checklist gives it a foundation. It already tracks where each PM is and what’s left, so an agent could start from that context instead of asking PMs to explain it.</p>
+      </div>
+      <p class="case-contact">Want to hear more? Email me at <a href="mailto:subihamut@gmail.com">subihamut@gmail.com</a></p>
+    </section>
+  </main>
+</body>
+</html>
