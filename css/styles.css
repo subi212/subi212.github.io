@@ -226,7 +226,7 @@ a.project:hover .project-title { text-decoration: underline; }
 .wip-bubble {
   position: absolute;
   z-index: 2;
-  left: 0;
+  left: 24px;
   top: calc(100% + 12px);
   display: grid;
   width: max-content;
@@ -603,6 +603,8 @@ a.project:hover .project-title { text-decoration: underline; }
   .wip-bubble {
     position: relative;
     top: auto;
+    left: 0;
+    margin-left: 12px;
     max-height: 0;
     padding: 0 14px;
     font-size: 14px;
