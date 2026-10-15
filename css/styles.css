@@ -1,0 +1,196 @@
+/* Design tokens from Figma */
+:root {
+  --text-strong: #333333;
+  --text: #0a0a0a;
+  --text-muted: #6f6f6f;
+  --accent: #1100a8;
+  --divider: #d3d3d3;
+  --nav-bg: #fbf9f9;
+  --bg: #ffffff;
+  --content-width: 926px;
+  --font: "Work Sans", system-ui, sans-serif;
+}
+
+*,
+*::before,
+*::after { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font);
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, p { margin: 0; }
+img { display: block; }
+
+/* Navigation */
+.site-nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 40px;
+  height: 48px;
+  background: var(--nav-bg);
+}
+
+.site-nav a {
+  color: var(--text);
+  font-weight: 300;
+  font-size: 16px;
+  text-decoration: none;
+}
+
+.site-nav a:hover { text-decoration: underline; }
+
+/* Layout */
+.container {
+  max-width: calc(var(--content-width) + 48px);
+  margin: 0 auto;
+  padding: 80px 24px 48px;
+}
+
+/* Intro */
+.intro {
+  padding-bottom: 48px;
+  border-bottom: 1px solid var(--divider);
+}
+
+.avatar {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  overflow: hidden;
+  margin-bottom: 32px;
+}
+
+.avatar img {
+  width: 75.97px;
+  height: 75.97px;
+  margin: -5.84px;
+  object-fit: cover;
+}
+
+.intro-text {
+  max-width: 878px;
+  color: var(--text-strong);
+  font-size: 24px;
+  font-weight: 500;
+  line-height: normal;
+}
+
+.intro-text em {
+  font-weight: 400;
+  font-style: italic;
+}
+
+.location {
+  margin-top: 20px;
+  font-size: 16px;
+  font-weight: 300;
+}
+
+/* Projects */
+.projects {
+  display: flex;
+  flex-direction: column;
+  gap: 80px;
+  margin-top: 80px;
+}
+
+.project {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  color: inherit;
+  text-decoration: none;
+}
+
+.project-head {
+  display: grid;
+  grid-template-columns: 1fr minmax(0, 570px);
+  align-items: center;
+  gap: 24px;
+}
+
+.project-title {
+  color: var(--text-strong);
+  font-size: 20px;
+  font-weight: 400;
+}
+
+.project-years {
+  margin-top: 20px;
+  color: var(--accent);
+  font-size: 12px;
+}
+
+.project-desc {
+  color: var(--text-muted);
+  font-size: 16px;
+}
+
+/* Project cards: children are placed in Figma's 926×364 coordinates
+   and scaled as percentages, so the collage keeps its shape at any width. */
+.card {
+  position: relative;
+  aspect-ratio: 926 / 364;
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+.card--blue { background: #c3e7ff; }
+.card--pink { background: #ffecec; }
+.card--mint { background: #f8fbf9; }
+
+.shot {
+  position: absolute;
+  left: calc(var(--x) / 926 * 100%);
+  top: calc(var(--y) / 364 * 100%);
+  width: calc(var(--w) / 926 * 100%);
+  height: calc(var(--h) / 364 * 100%);
+  overflow: hidden;
+}
+
+.shot img {
+  position: absolute;
+  max-width: none;
+}
+
+.shot--glow { box-shadow: 0 0 7.8px 3px rgba(107, 151, 254, 0.25); }
+.shot--soft { box-shadow: 0 0 6.5px rgba(0, 0, 0, 0.11); }
+
+.card-tint {
+  position: absolute;
+  inset: 0;
+  background: rgba(221, 221, 221, 0.2);
+}
+
+/* The logo SVG includes its drop-shadow padding (157.4×57.4 around a 138×38 mark) */
+.card-logo {
+  position: absolute;
+  right: calc(10.3 / 926 * 100%);
+  bottom: calc(10.3 / 364 * 100%);
+  width: calc(157.4 / 926 * 100%);
+  height: auto;
+}
+
+a.project .card { transition: transform 0.2s ease, box-shadow 0.2s ease; }
+a.project:hover .card {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+}
+a.project:hover .project-title { text-decoration: underline; }
+
+/* Phones and small tablets */
+@media (max-width: 760px) {
+  .container { padding: 48px 16px 40px; }
+  .intro-text { font-size: 20px; }
+  .projects { gap: 56px; margin-top: 48px; }
+  .project { gap: 20px; }
+  .project-head { grid-template-columns: 1fr; gap: 12px; }
+  .project-years { margin-top: 8px; }
+  .card { border-radius: 12px; }
+}
